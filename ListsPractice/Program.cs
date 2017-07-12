@@ -112,13 +112,25 @@ namespace ListsPractice
             //let user know it will be available in 3-5 days
             //when the user quits, show them all of the movies in the list
             string movieTitle;
-            List<string> movies = new List<string> { "Transporter", "Bourne Identity", "Speed", "Star Wars", "Avatar" };
+            List<string> movies = new List<string> { "transporter", "bourne identity", "speed", "star wars", "avatar" };
+            //intro to app
+            Console.WriteLine("Thanks for checking out our movie service!\n");
+            Console.WriteLine("You can quit at any time by typing \"QUIT\".\n");
             do
             {
-                Console.WriteLine("Thanks for checking out our movie service!\n");
-                Console.WriteLine("You can quit at any time by typing \"QUIT\".\n");
+                //get input from user
                 Console.WriteLine("Please enter a movie to see if we have it: ");
-                movieTitle = Console.ReadLine().ToUpper();
+                movieTitle = Console.ReadLine().ToLower();
+                //allow user to quit anytime, print full movie list after they quit
+                if (movieTitle == "quit")
+                {
+                    foreach (string moviesTitle in movies)
+                    {
+                        Console.WriteLine(moviesTitle);
+                    }
+                    Environment.Exit(0);
+                }
+                //let user know if we have movie they want, if not add to our list
                 if (movies.Contains(movieTitle))
                 {
                     Console.WriteLine("Yes! We have that movie and will send it to you ASAP!");
@@ -129,11 +141,7 @@ namespace ListsPractice
                     movies.Add(movieTitle);
                 }
 
-                if (Console.ReadLine() == "Quit")
-                {
-                    Console.WriteLine("Here is list of our current movies: " + movies);
-                }
-            } while (movieTitle != "QUIT");
+            } while (movieTitle != "quit");
                         
         }
     }
